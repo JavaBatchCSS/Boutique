@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": "p-001",
+      "title": "Casque Audio Bluetooth Pro",
+      "price": 79.99,
+      "originalPrice": 129.99,
+      "category": "electronics",
+      "emoji": "🎧",
+      "stock": 25,
+      "rating": 4.5,
+      "reviews": 128,
+      "featured": true,
+      "badge": "-38%",
+      "description": "Casque sans fil premium avec réduction de bruit active, autonomie exceptionnelle de 30h. Confort optimal pour de longues sessions d'écoute.",
+      "features": [
+        "Bluetooth 5.3",
+        "Réduction de bruit active (ANC)",
+        "30h d'autonomie",
+        "Charge rapide USB-C",
+        "Micro intégré pour appels"
+      ]
+    },
+    {
+      "id": "p-002",
+      "title": "Montre Connectée Sport GPS",
+      "price": 149.00,
+      "originalPrice": 199.00,
+      "category": "electronics",
+      "emoji": "⌚",
+      "stock": 15,
+      "rating": 4.7,
+      "reviews": 89,
+      "featured": true,
+      "badge": "NEW",
+      "description": "Montre sport étanche avec GPS intégré, suivi cardiaque avancé et 14 jours d'autonomie. Parfaite pour les sportifs exigeants.",
+      "features": ["GPS intégré", "Étanche 50m", "Cardio 24/7", "14 jours batterie", "100+ modes sport"]
+    }
+  ]
+}
