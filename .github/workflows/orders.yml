@@ -1,0 +1,70 @@
+name: 📦 Process New Orders
+
+on:
+  push:
+    paths:
+      - 'data/orders/**'
+      - 'data/orders-index.json'
+  workflow_dispatch:
+    inputs:
+      orderId:
+        description: 'Order ID to process'
+        required: false
+
+jobs:
+  process-order:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Read new orders
+        id: read
+        run: |
+          echo "## New orders detected" >> $GITHUB_STEP_SUMMARY
+          git diff --name-only HEAD~1 HEAD | grep "data/orders/" || echo "No new orders"
+
+      - name: 📧 Send confirmation email
+        if: env.MAILGUN_API_KEY
+        env:
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
+        run: |
+          echo "📧 Sending confirmation emails via Mailgun..."
+          # Add Mailgun API call here
+          # curl -s --user "api:$MAILGUN_API_KEY" \
+          #   https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages \
+          #   -F from="orders@github-shop.com" \
+          #   -F to="$CUSTOMER_EMAIL" \
+          #   -F subject="Order Confirmation" \
+          #   -F text="Thank you for your order!"
+
+      - name: 💬 Post Slack notification
+        if: env.SLACK_WEBHOOK
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          curl -X POST $SLACK_WEBHOOK \
+            -H 'Content-Type: application/json' \
+            -d '{"text":"🛒 New order received on GitHub Shop!"}'
+
+      - name: 📊 Update inventory
+        run: |
+          echo "📊 Updating inventory..."
+          # Script to decrement stock
+
+  validate-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON files
+        run: |
+          for file in $(find data -name "*.json"); do
+            echo "Validating $file..."
+            python -c "import json; json.load(open('$file'))" || exit 1
+          done
+          echo "✅ All JSON files valid"
