@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>⚙️ Admin - GitHub Shop</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <h2>⚙️ Admin</h2>
+      <nav>
+        <a href="#dashboard" class="active">📊 Dashboard</a>
+        <a href="#products">📦 Produits</a>
+        <a href="#orders">🛒 Commandes</a>
+        <a href="#settings">⚙️ Paramètres</a>
+        <a href="#/" target="_blank">👁️ Voir le site</a>
+      </nav>
+    </aside>
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1>Dashboard</h1>
+        <button class="btn btn-secondary" onclick="auth.logout()">🚪 Déconnexion</button>
+      </header>
+      <div class="admin-content" id="adminContent">
+        <div id="loginPrompt" style="text-align:center; padding: 3rem;">
+          <h2>🔐 Authentification requise</h2>
+          <p>Connectez-vous avec votre token GitHub pour accéder à l'administration.</p>
+          <button class="btn btn-primary" onclick="auth.promptTokenLogin()">Se connecter</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/github-api.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
