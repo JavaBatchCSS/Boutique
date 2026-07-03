@@ -5,8 +5,8 @@
 const CONFIG = {
   // GitHub
   GITHUB: {
-    owner: 'VOTRE-USERNAME',              // 👈 Votre nom d'utilisateur GitHub
-    repo: 'github-shop',                    // 👈 Nom du repo
+    owner: 'JavaBatchCSS',              // 👈 Votre nom d'utilisateur GitHub
+    repo: 'Boutique',                    // 👈 Nom du repo
     branch: 'main',
     token: '',                              // Token utilisateur (localStorage)
     apiBase: 'https://api.github.com',
@@ -31,7 +31,7 @@ const CONFIG = {
 
   // Admin
   ADMIN: {
-    allowedUsers: ['VOTRE-USERNAME'],        // 👈 Admins autorisés
+    allowedUsers: ['JavaBatchCSS'],        // 👈 Admins autorisés
     githubOAuthClientId: '',                  // Pour OAuth GitHub
   },
 
