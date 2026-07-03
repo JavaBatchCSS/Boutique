@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Boutique en ligne moderne hébergée sur GitHub">
+  <title>🛍️ GitHub Shop - Boutique en ligne</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="#/" class="logo" data-route="/">
+        <span class="logo-icon">🛍️</span>
+        <span class="logo-text">GitHub Shop</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#/" data-route="/">Accueil</a>
+        <a href="#/shop" data-route="/shop">Boutique</a>
+        <a href="#/about" data-route="/about">À propos</a>
+        <a href="#/contact" data-route="/contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="searchBtn" aria-label="Recherche">🔍</button>
+        <button class="icon-btn" id="wishlistBtn" aria-label="Favoris">❤️ <span class="badge" id="wishlistCount">0</span></button>
+        <button class="icon-btn" id="userBtn" aria-label="Compte">👤</button>
+        <button class="icon-btn cart-btn" id="cartBtn" aria-label="Panier">
+          🛒 <span class="badge" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Thème">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="app">
+    <!-- Le contenu sera injecté par le routeur -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>🛍️ GitHub Shop</h4>
+          <p>Votre boutique e-commerce moderne propulsée par GitHub.</p>
+          <div class="social-links">
+            <a href="#">📘</a>
+            <a href="#">🐦</a>
+            <a href="#">📸</a>
+            <a href="#">💼</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Boutique</h4>
+          <ul>
+            <li><a href="#/shop">Tous les produits</a></li>
+            <li><a href="#/shop?cat=electronics">Électronique</a></li>
+            <li><a href="#/shop?cat=clothing">Vêtements</a></li>
+            <li><a href="#/shop?cat=home">Maison</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Service Client</h4>
+          <ul>
+            <li><a href="#/contact">Contact</a></li>
+            <li><a href="#/faq">FAQ</a></li>
+            <li><a href="#/shipping">Livraison</a></li>
+            <li><a href="#/returns">Retours</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Recevez nos offres exclusives</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Votre email" required>
+            <button type="submit">S'inscrire</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> GitHub Shop. Propulsé par ❤️ et GitHub.</p>
+        <p>💳 Paiement sécurisé • 🚚 Livraison rapide • ↩️ Retours 30j</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <aside class="sidebar" id="cartSidebar">
+    <div class="sidebar-header">
+      <h3>🛒 Mon Panier</h3>
+      <button class="close-btn" id="closeCart">✕</button>
+    </div>
+    <div class="sidebar-body" id="cartItems">
+      <!-- Items du panier -->
+    </div>
+    <div class="sidebar-footer" id="cartFooter">
+      <!-- Total + bouton checkout -->
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/github-api.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/checkout.js"></script>
+  <script src="assets/js/shop.js"></script>
+</body>
+</html>
