@@ -1,0 +1,57 @@
+name: 🏷️ Inventory Check
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Every day at 8am
+  workflow_dispatch:
+
+jobs:
+  check-inventory:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 📊 Check low stock
+        id: check
+        run: |
+          python3 << 'EOF'
+          import json
+          with open('data/products.json') as f:
+              data = json.load(f)
+
+          low_stock = [p for p in data['products'] if p.get('stock', 0) < 10]
+          out_of_stock = [p for p in data['products'] if p.get('stock', 0) == 0]
+
+          print(f"⚠️ Low stock: {len(low_stock)}")
+          print(f"❌ Out of stock: {len(out_of_stock)}")
+
+          if low_stock or out_of_stock:
+              with open('low_stock.md', 'w') as f:
+                  f.write("# Inventory Alert\n\n")
+                  if out_of_stock:
+                      f.write("## Out of stock\n")
+                      for p in out_of_stock:
+                          f.write(f"- {p['title']} ({p['id']})\n")
+                  if low_stock:
+                      f.write("\n## Low stock\n")
+                      for p in low_stock:
+                          f.write(f"- {p['title']} ({p['id']}): {p['stock']} left\n")
+          EOF
+
+      - name: 🐛 Create issue if needed
+        if: hashFiles('low_stock.md') != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('low_stock.md', 'utf8');
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Inventory Alert - Low Stock Items',
+              body: body,
+              labels: ['inventory', 'alert']
+            });
